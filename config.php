@@ -1,7 +1,7 @@
 <?php
 
 $config = array(
-    'title' => 'Blog project',
+    'title' => 'Blog_project',
     'db' => array(
         'server' => 'localhost',
         'username' => 'root',

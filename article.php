@@ -25,7 +25,7 @@ require_once "navbar.php";
     <div class="post-content">
             <div>
                 <?php
-                $article= mysqli_query($connection, "SELECT * FROM `articles` WHERE `id` = ".$_GET['id']);
+                $article= mysqli_query($connection, "SELECT * FROM articles WHERE `id` = ".$_GET['id']);
                 if(mysqli_num_rows($article) <= 0)
                 {
                     ?>
@@ -68,7 +68,7 @@ require_once "navbar.php";
                     </div>
             <div class="comments-container">
                 <?php
-                $comments = mysqli_query($connection, "SELECT * FROM `comments` WHERE `id_article` = " . $art['id']);
+                $comments = mysqli_query($connection, "SELECT * FROM comments JOIN register ON comments.user_id = register.id WHERE comments.id_article =" .  $_GET['id']);
                 if(mysqli_num_rows($comments) <= 0)
                 {
                 ?>
@@ -96,7 +96,7 @@ require_once "navbar.php";
                                 while ($comm = mysqli_fetch_assoc($comments)){?>
                                     <div class='comments-content'>
                                         <div class='comment-pubdate'>Комментарий оставлен <?php echo $comm['pubdate']; ?></div>
-                                        <div class='comment-email'>Автор <?php echo $comm['email']; ?></div>
+                                        <div class='comment-email'>Автор <?php echo $comm['login']; ?></div>
                                         <div class='comment-text'><?php echo $comm['text']; ?></div>
                                     </div>
                             <?php

@@ -14,7 +14,5 @@ require_once "config.php";
     }
 
     setcookie('username', $user['login'], time() + 3600, "index.php");
-    setcookie('email', $user['email'], time() + 3600, "index.php");
 
-    if('Location: ' . $_SERVER['REQUEST_URI'] = 'index.html/Blog_project/index.php'){
-        header('Location: ' . $_SERVER['REQUEST_URI'] . '?r=1');}
+    header('Location: ' . $_SERVER['HTTP_REFERER']);

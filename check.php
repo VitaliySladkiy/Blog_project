@@ -27,7 +27,7 @@
     $connection -> query("INSERT INTO `register` (`login`, `email`, `pass`) VALUES ('$login','$email','$pass')");
     $connection -> close();
 
-    header('Location: index.php');
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 
 

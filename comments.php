@@ -2,7 +2,7 @@
 require_once "config.php";
 
     $text = $_POST['text'];
-    $email = $_COOKIE['email'];
+    $email = $_COOKIE['login'];
     $id_article = $_GET['id'];
 
     if(!isset($_COOKIE['email']) || !$_COOKIE['email']){
@@ -10,10 +10,10 @@ require_once "config.php";
         exit();
     }
 
-$connection -> query("INSERT INTO `comments` (`text`, `email`, `id_article`) VALUES ('$text','$email','$id_article')");
+$connection -> query("INSERT INTO `comments` (`text`, `login`, `id_article`) VALUES ('$text','$login','$id_article')");
 $connection -> close();
 
-header('Location: article.php');
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 
 

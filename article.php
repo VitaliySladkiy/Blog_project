@@ -68,7 +68,7 @@ require_once "navbar.php";
                     </div>
             <div class="comments-container">
                 <?php
-                $comments = mysqli_query($connection, "SELECT * FROM comments JOIN register ON comments.user_id = register.id WHERE comments.id_article =" .  $_GET['id']);
+                $comments = mysqli_query($connection, "SELECT * FROM comments JOIN register ON comments.user_id = register.id WHERE comments.id_article =" .  $_GET['id'] . " ORDER BY pubdate desc");
                 if(mysqli_num_rows($comments) <= 0)
                 {
                 ?>
@@ -105,11 +105,12 @@ require_once "navbar.php";
                     </div>
                     <div class="add-comment">
                         <h2>Add your comment</h2>
-                        <form method="post" action="comments.php" class="comment-form">
+                        <form method="POST" action="comments.php" role="form" class="comment-form">
                             <label>
-                                <textarea name="text" class="comment-textarea" placeholder="your comment..."></textarea>
+                                 <input type="hidden" value="<?=$_GET['id'];?>" name = 'id_article'">
+                                <textarea name="comment_text" class="comment-textarea" placeholder="your comment..."></textarea>
                             </label>
-                            <button class="comment-btn">Add comment</button>
+                            <button class="comment-btn" type="submit" >Add comment</button>
                         </form>
                     </div>
                 </div>

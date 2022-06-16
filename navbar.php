@@ -91,7 +91,7 @@ require_once "config.php";
                             <input name="pass" id="signupPassword" type="password" maxlength="25" class="form-control" placeholder="at least 6 characters">
                         </div>
                         <div class="form-group">
-                            <button id="signupSubmit" type="submit" class="btn btn-info btn-block" onclick="">Sign in</button>
+                            <button id="signupSubmit" type="submit" class="btn btn-info btn-block">Sign in</button>
                         </div>
                         <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our <a href="#">Privacy Policy</a>.</p>
                         <p>Don't have an account? <a id="changeReg" href="#" >Registration</a></p>

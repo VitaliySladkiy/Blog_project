@@ -66,6 +66,7 @@ require_once "navbar.php";
                 <?php
                 }?>
                     </div>
+            <div class="comments-container">
                 <?php
                 $comments = mysqli_query($connection, "SELECT * FROM `comments` WHERE `id_article` = " . $art['id']);
                 if(mysqli_num_rows($comments) <= 0)
@@ -87,26 +88,42 @@ require_once "navbar.php";
                 <?php
                 } else
                 {
-                $comm = mysqli_fetch_assoc($comments);
                 ?>
-                    <div class="container">
-                        <div class="background"></div>
-                        <div class="comments-content">
+                    <div class='container'>
+                        <div class='background'></div>
                             <h2>Comments</h2>
-                            <div class="comment-pubdate">Комментарий оставлен <?php echo $comm['pubdate']; ?></div>
-                            <div class="comment-email">Автор <?php echo $comm['email']; ?></div>
-                            <div class="comment-text"><?php echo $comm['text']; ?></div>
-                        </div>
+                            <?php
+                                while ($comm = mysqli_fetch_assoc($comments)){?>
+                                    <div class='comments-content'>
+                                        <div class='comment-pubdate'>Комментарий оставлен <?php echo $comm['pubdate']; ?></div>
+                                        <div class='comment-email'>Автор <?php echo $comm['email']; ?></div>
+                                        <div class='comment-text'><?php echo $comm['text']; ?></div>
+                                    </div>
+                            <?php
+                                }}
+                            ?>
                     </div>
-                <?php
-                }
-                ?>
+                    <div class="add-comment">
+                        <h2>Add your comment</h2>
+                        <form method="post" action="comments.php" class="comment-form">
+                            <label>
+                                <textarea name="text" class="comment-textarea" placeholder="your comment..."></textarea>
+                            </label>
+                            <button class="comment-btn">Add comment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
 </section>
 <?php
 require_once "footer.html";
 ?>
 
-<script src="js/main.js"></script>
+<!------------------- Jquery Library file --------------------->
+<script src="js/Jquery3.4.1.min.js"></script>
+
+
+<script src="js/article.js"></script>
 </body>
 </html>

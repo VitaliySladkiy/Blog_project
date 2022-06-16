@@ -50,7 +50,7 @@ require_once "config.php";
                 <?php
                 if($_COOKIE['login'] == ''):
                 ?>
-                <div class="col active" id="reg">
+                <div class="col" id="reg">
                     <form method="POST" action="check.php" role="form">
                         <div class="form-group">
                             <h2>Create account</h2>
@@ -75,11 +75,9 @@ require_once "config.php";
                             <button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button>
                         </div>
                         <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our <a href="#">Privacy Policy</a>.</p>
-                        <hr>
-                        <p>Already have an account? <a id="changeReg" href="#" >Sign in</a></p>
                     </form>
                 </div>
-                <div class="col" id="auth">
+                <div class="col active" id="auth">
                     <form method="POST" action="auth.php" role="form">
                         <div class="form-group">
                             <h2>Authorization</h2>
@@ -96,6 +94,7 @@ require_once "config.php";
                             <button id="signupSubmit" type="submit" class="btn btn-info btn-block" onclick="">Sign in</button>
                         </div>
                         <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our <a href="#">Privacy Policy</a>.</p>
+                        <p>Don't have an account? <a id="changeReg" href="#" >Registration</a></p>
                     </form>
                 </div>
             </div>

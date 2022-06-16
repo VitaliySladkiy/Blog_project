@@ -102,7 +102,7 @@ require_once "config.php";
                                 <div class='post-title'>
                                     <h2><?php echo $art['title'] ?></h2>
                                     <p><?php echo $art['text_articles'] ?></p>
-                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>">Read more &nbsp; <i class='fas fa-arrow-right'></i></a>
+                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>" target="_blank">Read more &nbsp; <i class='fas fa-arrow-right'></i></a>
                                 </div>
                             </div>
                         <?php
@@ -128,7 +128,7 @@ require_once "config.php";
                                 <div class='post-title'>
                                     <h2><?php echo $art['title'] ?></h2>
                                     <p><?php echo $art['text_articles'] ?></p>
-                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>">Read more &nbsp; <i class='fas fa-arrow-right'></i></a>
+                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>" target="_blank">Read more &nbsp; <i class='fas fa-arrow-right'></i></a>
                                 </div>
                             </div>
                         <?php

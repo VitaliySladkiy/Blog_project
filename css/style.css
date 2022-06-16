@@ -129,6 +129,7 @@ p{
 }
 
 nav .logged{
+    font-family: 'Font Awesome 5 Brands';
     margin-top: 7px;
     padding: 15px 45px;
     border-radius: 2rem;

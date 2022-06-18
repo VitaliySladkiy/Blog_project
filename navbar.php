@@ -8,24 +8,27 @@ require_once "config.php";
     <div class="nav-menu flex-row">
         <div class="nav-brand">
             <a href="./index.php" class="text-gray">Blooger</a>
-        </div>
+        </div><?php
+        if ($_SERVER['REQUEST_URI'] =="/index.html/Blog_project/index.php"){
+            echo"
         <div>
-            <ul class="nav-items">
-                <li class="nav-link scrollHome">
-                    <a href="#">Home</a>
+            <ul class='nav-items'>
+                <li class='nav-link scrollHome'>
+                    <a href='#'>Home</a>
                 </li>
-                <li class="nav-link scrollCategory">
-                    <a href="#">Category</a>
+                <li class='nav-link scrollCategory'>
+                    <a href='#'>Category</a>
                 </li>
-                <li class="nav-link scrollPopularPosts">
-                    <a href="#">Popular Posts</a>
+                <li class='nav-link scrollPopularPosts'>
+                    <a href='#'>Popular Posts</a>
                 </li>
-                <li class="nav-link scrollFooter">
-                    <a href="#">Contact Us</a>
+                <li class='nav-link scrollFooter'>
+                    <a href='#'>Contact Us</a>
                 </li>
             </ul>
         </div>
-        <?php if(!isset($_COOKIE['username']) || !$_COOKIE['username']): ?>
+        ";}
+         if(!isset($_COOKIE['username']) || !$_COOKIE['username']): ?>
             <div class='btn' id='registration-btn'>login in</div>
         <?php else: ?>
         <div class="logged" id="logged">

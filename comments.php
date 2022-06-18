@@ -7,6 +7,11 @@ require_once "config.php";
     $text = $_POST['comment_text'];
     $id_article = $_POST['id_article'];
 
+    if(!isset($_COOKIE['username']) || !$_COOKIE['username']){
+        echo "Нужно войти в аккаунт!";
+        exit();
+}
+
 $connection -> query("INSERT INTO `comments` (`text`, `user_id`, `id_article`) VALUES ('$text','$user_id','$id_article')");
 $connection -> close();
 

@@ -49,7 +49,6 @@ require_once "config.php";
     <!------------------- Blog Carousel --------------------->
 
     <section>
-
         <div class="blog">
             <div class="container">
                 <div class="owl-carousel owl-theme blog-post">

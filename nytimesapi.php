@@ -12,5 +12,7 @@
     $response = json_decode(curl_exec($ch), true);
     curl_close($ch);
 
-    echo '<pre>';
-    var_dump($response);
+
+//
+//    $str = $response['results'][4]['media'][0]["media-metadata"][2]['url'];
+//    var_dump($str);

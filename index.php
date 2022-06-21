@@ -1,5 +1,6 @@
 <?php
 require_once "config.php";
+require_once "nytimesapi.php";
 ?>
 
 <!doctype html>
@@ -53,14 +54,13 @@ require_once "config.php";
             <div class="container">
                 <div class="owl-carousel owl-theme blog-post">
                     <?php
-                    $carousel = mysqli_query($connection, "SELECT * FROM `carousel`");
-                    while ($car = mysqli_fetch_array($carousel)) {
+                    for($i = 0; $i < 13; $i++ ){
                         echo "
                             <div class='blog-content' data-aos='zoom-in' data-aos-delay='100'>
-                                <img src='./assets/Blog-post/" . $car['image'] . "' alt='post-1'>
+                                <img src='" . $response['results'][$i]['media'][0]["media-metadata"][2]['url'] . "' alt='post-1'>
                                 <div class='blog-title'>
-                                    <h3>" . $car['title'] . "</h3>
-                                    <button class='btn btn-blog'>Fashion</button>
+                                    <h3>" . $response['results'][$i]['title'] . "</h3>
+                                    <a class='btn btn-blog' target='_blank' href='" . $response['results'][$i]['url'] . "'>Fashion</a>
                                 </div>
                             </div>
                         ";

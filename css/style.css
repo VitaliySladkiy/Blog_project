@@ -323,11 +323,18 @@ main .site-title .site-background{
 /*--------------------Blog Carousel------------------------*/
 
 main .blog{
+    font-family: sans-serif;
     background: url("../assets/Abract01.png");
     background-repeat: no-repeat;
     background-position: right;
     height: 900px;
     width: 100%;
+}
+
+main .blog .container h1{
+    font-family: cursive;
+    font-size: 35px;
+    text-align: center;
 }
 
 main .blog .blog-post{

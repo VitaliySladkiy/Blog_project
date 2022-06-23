@@ -52,12 +52,13 @@ require_once "nytimesapi.php";
     <section>
         <div class="blog">
             <div class="container">
+                <h1 data-aos='zoom-in' data-aos-delay='100'>Articles you might like</h1>
                 <div class="owl-carousel owl-theme blog-post">
                     <?php
                     for($i = 0; $i < 13; $i++ ){
                         echo "
                             <div class='blog-content' data-aos='zoom-in' data-aos-delay='100'>
-                                <img src='" . $response['results'][$i]['media'][0]["media-metadata"][2]['url'] . "' alt='post-1'>
+                                <img src='" . $response['results'][$i]['media'][0]['media-metadata'][2]['url'] . "' alt='post-1'>
                                 <div class='blog-title'>
                                     <h3>" . $response['results'][$i]['title'] . "</h3>
                                     <a class='btn btn-blog' target='_blank' href='" . $response['results'][$i]['url'] . "'>Fashion</a>
@@ -144,27 +145,33 @@ require_once "nytimesapi.php";
                 </div>
             </div>
             <aside class="sidebar">
+                <?php $sql_articles_category = "SELECT * FROM `articles` 
+                                                JOIN articles_category on articles_category.id = articles.category_id";
+                $articles_category = mysqli_query($connection, $sql_articles_category);
+                $art_cat = mysqli_fetch_array($articles_category);
+                print_r(count($art_cat['category']));
+                ?>
                 <div class="category">
                     <h1>Category</h1>
                     <ul class="category-list">
                         <li class="list-items" data-aos="fade-left" data-aos-delay="100">
-                            <a href="#">Software</a>
+                            <a href="#">Nature</a>
                             <span>(05)</span>
                         </li>
                         <li class="list-items" data-aos="fade-left" data-aos-delay="200">
-                            <a href="#">Technology</a>
+                            <a href="#">Science</a>
                             <span>(02)</span>
                         </li>
                         <li class="list-items" data-aos="fade-left" data-aos-delay="300">
-                            <a href="#">Lifestyle</a>
+                            <a href="#">Animals</a>
                             <span>(07)</span>
                         </li>
                         <li class="list-items" data-aos="fade-left" data-aos-delay="400">
-                            <a href="#">Shopping</a>
+                            <a href="#">Traveling</a>
                             <span>(01)</span>
                         </li>
                         <li class="list-items" data-aos="fade-left" data-aos-delay="500">
-                            <a href="#">Food</a>
+                            <a href="#">Others</a>
                             <span>(08)</span>
                         </li>
                     </ul>

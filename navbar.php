@@ -9,7 +9,7 @@ require_once "config.php";
         <div class="nav-brand">
             <a href="./index.php" class="text-gray">Blooger</a>
         </div><?php
-        if ($_SERVER['REQUEST_URI'] =="/index.html/Blog_project/index.php"){
+        if ($_SERVER["DOCUMENT_URI"] =="/index.html/Blog_project/index.php"){
             echo"
         <div>
             <ul class='nav-items'>
@@ -97,14 +97,10 @@ require_once "config.php";
                             <button id="signupSubmit" type="submit" class="btn btn-info btn-block">Sign in</button>
                         </div>
                         <p class="form-group">By creating an account, you agree to our <a href="#">Terms of Use</a> and our <a href="#">Privacy Policy</a>.</p>
-                        <p>Don't have an account? <a id="changeReg" href="#" >Registration</a></p>
+                        <p class="">Don't have an account? <a id="changeReg" href="#" >Registration</a></p>
                     </form>
                 </div>
             </div>
-            <?php
-            else:
-                ?>
-                <p>Привет, <?=$_COOKIE['login'] ?> . Чтобы выйти нажмите <a href="./exit.php">здесь</a>.</p>
             <?php
             endif;
             ?>

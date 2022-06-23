@@ -1,6 +1,7 @@
 <?php
 
     //?api-key=eepkbBZP5wmx4gDDQiG8zuK2JYCn2LR8
+
     $url = 'https://api.nytimes.com/svc/mostpopular/v2/emailed/1.json';
 
     $APPID = 'eepkbBZP5wmx4gDDQiG8zuK2JYCn2LR8';

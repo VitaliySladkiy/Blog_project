@@ -2,16 +2,28 @@
 
     //?api-key=eepkbBZP5wmx4gDDQiG8zuK2JYCn2LR8
 
-    $url = 'https://api.nytimes.com/svc/mostpopular/v2/emailed/1.json';
+    $url_viewed = 'https://api.nytimes.com/svc/mostpopular/v2/emailed/1.json';
+    $url_shared = 'https://api.nytimes.com/svc/mostpopular/v2/shared/1/facebook.json';
 
     $APPID = 'eepkbBZP5wmx4gDDQiG8zuK2JYCn2LR8';
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_URL, $url.'?api-key='.$APPID);
+    $ch_viewed = curl_init();
+    curl_setopt($ch_viewed, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch_viewed, CURLOPT_URL, $url_viewed.'?api-key='.$APPID);
 
-    $response = json_decode(curl_exec($ch), true);
-    curl_close($ch);
+    ($response = json_decode(curl_exec($ch_viewed), true));
+    curl_close($ch_viewed);
+
+    $ch_shared = curl_init();
+    curl_setopt($ch_shared, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch_shared, CURLOPT_URL, $url_shared.'?api-key='.$APPID);
+
+
+    ($shared = json_decode(curl_exec($ch_shared), true));
+    var_dump($shared['results'][0]['published_date']);
+    curl_close($ch_shared);
+
+
 
 
 //

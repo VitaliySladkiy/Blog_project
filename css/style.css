@@ -538,6 +538,10 @@ main .site-content .post-content .post-title .post-btn:hover{
     background: white !important;
 }
 
+.site-content .sidebar .popular-post .post-info span i:before{
+    margin-right: 5px;
+}
+
 .site-content .sidebar .popular-post .post-title a{
     font-size: 1rem;
 }

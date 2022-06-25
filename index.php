@@ -56,6 +56,7 @@ require_once "nytimesapi.php";
                 <div class="owl-carousel owl-theme blog-post">
                     <?php
                     for($i = 0; $i < 13; $i++ ){
+                    if(!is_null($response['results'][$i]['media'][0]['media-metadata'][2]['url'])){
                         echo "
                             <div class='blog-content' data-aos='zoom-in' data-aos-delay='100'>
                                 <img src='" . $response['results'][$i]['media'][0]['media-metadata'][2]['url'] . "' alt='post-1'>
@@ -65,7 +66,7 @@ require_once "nytimesapi.php";
                                 </div>
                             </div>
                         ";
-                    }
+                    }else continue;}
                     ?>
                 </div>
                 <div class="owl-navigation">
@@ -145,58 +146,46 @@ require_once "nytimesapi.php";
                 </div>
             </div>
             <aside class="sidebar">
-                <?php $sql_articles_category = "SELECT * FROM `articles` 
-                                                JOIN articles_category on articles_category.id = articles.category_id";
-                $articles_category = mysqli_query($connection, $sql_articles_category);
-                $art_cat = mysqli_fetch_array($articles_category);
-                print_r(count($art_cat['category']));
-                ?>
-                <div class="category">
+                <div class='category'>
                     <h1>Category</h1>
-                    <ul class="category-list">
-                        <li class="list-items" data-aos="fade-left" data-aos-delay="100">
-                            <a href="#">Nature</a>
-                            <span>(05)</span>
+                    <ul class='category-list'>
+                        <?php $sql_articles_category = "SELECT category , COUNT(category) as count_category
+                                                        FROM articles_category
+                                                        JOIN articles 
+                                                        ON articles_category.id = articles.category_id
+                                                        GROUP by category";
+                        $articles_category = mysqli_query($connection, $sql_articles_category);
+                        while ($art_cat = mysqli_fetch_array($articles_category)){
+                            echo"
+                        <li class='list-items' data-aos='fade-left' data-aos-delay='100'>
+                            <a href='#'>" .$art_cat['category']. "</a>
+                            <span>(". $art_cat['count_category'] .")</span>
                         </li>
-                        <li class="list-items" data-aos="fade-left" data-aos-delay="200">
-                            <a href="#">Science</a>
-                            <span>(02)</span>
-                        </li>
-                        <li class="list-items" data-aos="fade-left" data-aos-delay="300">
-                            <a href="#">Animals</a>
-                            <span>(07)</span>
-                        </li>
-                        <li class="list-items" data-aos="fade-left" data-aos-delay="400">
-                            <a href="#">Traveling</a>
-                            <span>(01)</span>
-                        </li>
-                        <li class="list-items" data-aos="fade-left" data-aos-delay="500">
-                            <a href="#">Others</a>
-                            <span>(08)</span>
-                        </li>
+                        ";}
+                        ?>
                     </ul>
                 </div>
                 <div class="popular-post">
                     <h2>Popular Posts</h2>
                     <?php
-                    $popular_posts = mysqli_query($connection, "SELECT * FROM `popular_posts`");
-                    while ($pop = mysqli_fetch_array($popular_posts)) {
+                    for($i = 0; $i <= 5; $i++ ){
+                    if(!is_null($shared['results'][$i]['media'][0]['media-metadata'][2]['url'])){
                         echo "
                     <div class='post-content' data-aos='flip-up' data-aos-delay='200'>
                         <div class='post-image'>
                             <div>
-                                <img src='./assets/popular-post/" . $pop['image'] . "' class='img' alt='blog1'>
+                                <img src='" . $shared['results'][$i]['media'][0]['media-metadata'][2]['url'] . "' class='img' alt='blog1'>
                             </div>
                             <div class='post-info flex-row'>
-                                <span><i class='fas fa-calendar-alt text-grey'></i>&nbsp;&nbsp;" . $pop['pubdate'] . "</span>
+                                <span><i class='fas fa-calendar-alt text-grey'>". $shared['results'][0]['published_date'] ."</i></span>
                             </div>
                         </div>
                         <div class='post-title'>
-                            <a href='#'>" . $pop['title'] . "</a>
+                            <a href='" . $shared['results'][$i]['url'] . "'>" . $shared['results'][$i]['title'] . "</a>
                         </div>
                     </div>
                         ";
-                    }
+                    }else continue;}
                     ?>
                 </div>
                 <div class="newsletter">

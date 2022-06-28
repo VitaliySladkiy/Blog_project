@@ -86,7 +86,10 @@ require_once "nytimesapi.php";
             <div class="posts">
                 <span id="one" class="first active">
                     <?php
-                    $articles = mysqli_query($connection, "SELECT * FROM `articles` where `id` < 4");
+                    $sql_articles_first = "SELECT * FROM articles 
+                                        JOIN register ON register.id = articles.user_id
+                                        where articles.id < 4";
+                    $articles = mysqli_query($connection, $sql_articles_first);
                     while ($art = mysqli_fetch_array($articles))
                     {
                         ?>
@@ -96,7 +99,7 @@ require_once "nytimesapi.php";
                                         <img src='./assets/Blog-post/<?php echo $art['image'] ?>' class='img' alt='blog1'>
                                     </div>
                                     <div class='post-info flex-row'>
-                                        <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['author'] ?></span>
+                                        <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['login'] ?></span>
                                         <span><i class='fas fa-calendar-alt text-grey'></i>&nbsp;&nbsp;<?php echo $art['pubdate'] ?></span>
                                     </div>
                                 </div>
@@ -113,7 +116,10 @@ require_once "nytimesapi.php";
                 </span>
                 <span id="two" class="second">
                     <?php
-                    $articles = mysqli_query($connection, "SELECT * FROM `articles` where `id` < 7 and `id` > 3 ");
+                    $sql_articles_second = "SELECT * FROM articles 
+                                        JOIN register ON register.id = articles.user_id
+                                        where articles.id < 7 and articles.id > 3";
+                    $articles = mysqli_query($connection, $sql_articles_second);
                     while ($art = mysqli_fetch_array($articles)) {
                         ?>
                         <div class='post-content' data-aos='zoom-in'>
@@ -122,7 +128,7 @@ require_once "nytimesapi.php";
                                         <img src='./assets/Blog-post/<?php echo $art['image'] ?>' class='img' alt='blog1'>
                                     </div>
                                     <div class='post-info flex-row'>
-                                        <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['author'] ?></span>
+                                        <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['login'] ?></span>
                                         <span><i class='fas fa-calendar-alt text-grey'></i>&nbsp;&nbsp;<?php echo $art['pubdate'] ?></span>
                                     </div>
                                 </div>
@@ -137,12 +143,9 @@ require_once "nytimesapi.php";
                     ?>
                 <hr>
                 </span>
-                <span id="three" class="third"></span>
                 <div class="pagination flex-row">
-                    <a href="#"><i class="fas fa-chevron-left"></i></a>
                     <a class="page active" id="first">1</a>
                     <a class="page" id="second">2</a>
-                    <a href="#"><i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
             <aside class="sidebar">
@@ -153,7 +156,8 @@ require_once "nytimesapi.php";
                                                         FROM articles_category
                                                         JOIN articles 
                                                         ON articles_category.id = articles.category_id
-                                                        GROUP by category";
+                                                        GROUP by category
+                                                        ORDER BY count_category desc";
                         $articles_category = mysqli_query($connection, $sql_articles_category);
                         while ($art_cat = mysqli_fetch_array($articles_category)){
                             echo"
@@ -168,7 +172,7 @@ require_once "nytimesapi.php";
                 <div class="popular-post">
                     <h2>Popular Posts</h2>
                     <?php
-                    for($i = 0; $i <= 5; $i++ ){
+                    for($i = 0; $i < 5; $i++ ){
                     if(!is_null($shared['results'][$i]['media'][0]['media-metadata'][2]['url'])){
                         echo "
                     <div class='post-content' data-aos='flip-up' data-aos-delay='200'>

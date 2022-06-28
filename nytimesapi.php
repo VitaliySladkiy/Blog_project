@@ -20,7 +20,6 @@
 
 
     ($shared = json_decode(curl_exec($ch_shared), true));
-    var_dump($shared['results'][0]['published_date']);
     curl_close($ch_shared);
 
 

@@ -352,6 +352,10 @@ section.container{
     display: flex;
 }
 
+.post-content .post-info span{
+    margin-right: 10px;
+}
+
 .post-title h2{
     margin: 5px 0 0 10px;
 }

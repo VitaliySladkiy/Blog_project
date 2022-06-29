@@ -421,6 +421,10 @@ main .posts span.second.active{
     display: block;
 }
 
+main .posts .post-content img{
+    height: 600px;
+}
+
 main .site-content .post-content .post-image, .post-title{
     padding: 15px 30px;
     position: relative;

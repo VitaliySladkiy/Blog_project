@@ -25,7 +25,10 @@ require_once "navbar.php";
     <div class="post-content">
             <div>
                 <?php
-                $article= mysqli_query($connection, "SELECT * FROM articles WHERE `id` = ".$_GET['id']);
+                $sql_article_info = "SELECT * FROM articles
+                                     JOIN register ON register.id = articles.user_id
+                                     WHERE articles.id = ".$_GET['id'];
+                $article= mysqli_query($connection, $sql_article_info);
                 if(mysqli_num_rows($article) <= 0)
                 {
                     ?>
@@ -50,7 +53,7 @@ require_once "navbar.php";
                 ?>
                     <div class='article-content' data-aos='zoom-in'>
                         <div class='post-info flex-row'>
-                            <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['author']; ?></span>
+                            <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['login']; ?></span>
                             <span><i class='fas fa-calendar-alt text-grey'></i>&nbsp;&nbsp;<?php echo $art['pubdate']; ?></span>
                         </div>
                         <div class='post-image'>

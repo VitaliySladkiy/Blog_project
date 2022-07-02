@@ -88,9 +88,12 @@ require_once "./navbar.php" ?>
             <div class="posts">
                 <span id="one" class="first active">
                     <?php
-                    $sql_articles_first = "SELECT * FROM articles 
-                                        JOIN register ON register.id = articles.user_id
-                                        where articles.id < 4";
+//                    $sql_articles_only = "SELECT * FROM articles";
+//                    $articles_only = mysqli_query($connection, $sql_articles_only);
+//                    $art_only = mysqli_fetch_array($articles_only);
+                    $sql_articles_first = "SELECT * FROM register as reg 
+                                        JOIN articles as art ON art.user_id = reg.id
+                                        where art.id < 4";
                     $articles = mysqli_query($connection, $sql_articles_first);
                     while ($art = mysqli_fetch_array($articles))
                     {
@@ -137,7 +140,7 @@ require_once "./navbar.php" ?>
                                 <div class='post-title'>
                                     <h2><?php echo $art['title'] ?></h2>
                                     <p><?php echo $art['text_articles'] ?></p>
-                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>" target="_blank">Read more<i class='fas fa-arrow-right'></i></a>
+                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>">Read more<i class='fas fa-arrow-right'></i></a>
                                 </div>
                             </div>
                         <?php

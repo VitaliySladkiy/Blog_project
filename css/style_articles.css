@@ -365,6 +365,10 @@ section.container{
     margin-left: 10px;
 }
 
+.paginator{
+    display: flex;
+}
+
 
 /*-----X------------Articles---------------X----*/
 

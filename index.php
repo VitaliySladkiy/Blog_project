@@ -30,7 +30,9 @@ require_once "nytimesapi.php";
 </head>
 
 <body>
-<?php require_once "./navbar.php" ?>
+
+<?php
+require_once "./navbar.php" ?>
 <!-----------------Main Site Section------------------->
 
 <main>
@@ -99,14 +101,14 @@ require_once "nytimesapi.php";
                                         <img src='./assets/Blog-post/<?php echo $art['image'] ?>' class='img' alt='blog1'>
                                     </div>
                                     <div class='post-info flex-row'>
-                                        <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['login'] ?></span>
-                                        <span><i class='fas fa-calendar-alt text-grey'></i>&nbsp;&nbsp;<?php echo $art['pubdate'] ?></span>
+                                        <span><i class='fas fa-user text-grey'></i><?php echo $art['login'] ?></span>
+                                        <span><i class='fas fa-calendar-alt text-grey'></i><?php echo $art['pubdate'] ?></span>
                                     </div>
                                 </div>
                                 <div class='post-title'>
                                     <h2><?php echo $art['title'] ?></h2>
                                     <p><?php echo $art['text_articles'] ?></p>
-                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>">Read more &nbsp; <i class='fas fa-arrow-right'></i></a>
+                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>">Read more<i class='fas fa-arrow-right'></i></a>
                                 </div>
                             </div>
                         <?php
@@ -128,14 +130,14 @@ require_once "nytimesapi.php";
                                         <img src='./assets/Blog-post/<?php echo $art['image'] ?>' class='img' alt='blog1'>
                                     </div>
                                     <div class='post-info flex-row'>
-                                        <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['login'] ?></span>
-                                        <span><i class='fas fa-calendar-alt text-grey'></i>&nbsp;&nbsp;<?php echo $art['pubdate'] ?></span>
+                                        <span><i class='fas fa-user text-grey'></i><?php echo $art['login'] ?></span>
+                                        <span><i class='fas fa-calendar-alt text-grey'></i><?php echo $art['pubdate'] ?></span>
                                     </div>
                                 </div>
                                 <div class='post-title'>
                                     <h2><?php echo $art['title'] ?></h2>
                                     <p><?php echo $art['text_articles'] ?></p>
-                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>" target="_blank">Read more &nbsp; <i class='fas fa-arrow-right'></i></a>
+                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>" target="_blank">Read more<i class='fas fa-arrow-right'></i></a>
                                 </div>
                             </div>
                         <?php
@@ -162,7 +164,7 @@ require_once "nytimesapi.php";
                         while ($art_cat = mysqli_fetch_array($articles_category)){
                             echo"
                         <li class='list-items' data-aos='fade-left' data-aos-delay='100'>
-                            <a href='#'>" .$art_cat['category']. "</a>
+                            <a method = 'get'>" .$art_cat['category']. "</a>
                             <span>(". $art_cat['count_category'] .")</span>
                         </li>
                         ";}
@@ -172,7 +174,7 @@ require_once "nytimesapi.php";
                 <div class="popular-post">
                     <h2>Popular Posts</h2>
                     <?php
-                    for($i = 0; $i < 5; $i++ ){
+                    for($i = 0; $i < 5; $i++){
                     if(!is_null($shared['results'][$i]['media'][0]['media-metadata'][2]['url'])){
                         echo "
                     <div class='post-content' data-aos='flip-up' data-aos-delay='200'>

@@ -23,8 +23,15 @@ require_once "navbar.php";
 
 <section class="container">
     <div class="post-content">
-            <div>
                 <?php
+
+                if (isset($_GET['id'])) {
+                    $page = (int)$_GET['id'];
+                }
+                $total_count_q = mysqli_query($connection, "SELECT COUNT(id) AS `total_count` FROM `articles`");
+                $total_count = mysqli_fetch_assoc($total_count_q);
+                $total_count = $total_count['total_count'];
+
                 $sql_article_info = "SELECT * FROM articles
                                      JOIN register ON register.id = articles.user_id
                                      WHERE articles.id = ".$_GET['id'];
@@ -44,8 +51,8 @@ require_once "navbar.php";
                                             </div>
                                         </div>
                                 </section>
-                        </div>
-                    </div>
+                                    </div>
+                            </div>
                     <?php
                 }   else
                 {
@@ -65,7 +72,6 @@ require_once "navbar.php";
                         </div>
                         <div class='post-title'>
                         </div>
-                    </div>
                 <?php
                 }?>
                     </div>
@@ -117,7 +123,17 @@ require_once "navbar.php";
                         </form>
                     </div>
                 </div>
-            </div>
+                <div class="paginator">
+                <?php
+                if ($page > 1) {
+                    echo '<a href="/index.html/Blog_project/article.php?id=' . ($page - 1) . '"><h3>&laquo;Предыдущая страница</h3></a>';
+                }
+                if ($page < $total_count) {
+                    echo '<a href="/index.html/Blog_project/article.php?id=' . ($page + 1) . '"><h3>Следующая страница&raquo;</h3></a>';
+                }
+                ?>
+                </div>
+    </div>
 
 </section>
 <?php

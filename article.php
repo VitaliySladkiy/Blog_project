@@ -60,8 +60,8 @@ require_once "navbar.php";
                 ?>
                     <div class='article-content' data-aos='zoom-in'>
                         <div class='post-info flex-row'>
-                            <span><i class='fas fa-user text-grey'></i>&nbsp;&nbsp;<?php echo $art['login']; ?></span>
-                            <span><i class='fas fa-calendar-alt text-grey'></i>&nbsp;&nbsp;<?php echo $art['pubdate']; ?></span>
+                            <span><i class='fas fa-user text-grey'></i><?php echo $art['login']; ?></span>
+                            <span><i class='fas fa-calendar-alt text-grey'></i><?php echo $art['pubdate']; ?></span>
                         </div>
                         <div class='post-image'>
                             <div>
@@ -126,10 +126,10 @@ require_once "navbar.php";
                 <div class="paginator">
                 <?php
                 if ($page > 1) {
-                    echo '<a href="/index.html/Blog_project/article.php?id=' . ($page - 1) . '"><h3>&laquo;Предыдущая страница</h3></a>';
+                    echo '<a href="/index.html/Blog_project/article.php?id=' . ($page - 1) . '"><h3>&laquo;Предыдущая статья</h3></a>';
                 }
                 if ($page < $total_count) {
-                    echo '<a href="/index.html/Blog_project/article.php?id=' . ($page + 1) . '"><h3>Следующая страница&raquo;</h3></a>';
+                    echo '<a href="/index.html/Blog_project/article.php?id=' . ($page + 1) . '"><h3>Следующая статья&raquo;</h3></a>';
                 }
                 ?>
                 </div>

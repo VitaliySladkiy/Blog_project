@@ -32,7 +32,8 @@ require_once "nytimesapi.php";
 <body>
 
 <?php
-require_once "./navbar.php" ?>
+require_once "./navbar.php"
+?>
 <!-----------------Main Site Section------------------->
 
 <main>
@@ -86,32 +87,39 @@ require_once "./navbar.php" ?>
     <section class="container">
         <div class="site-content">
             <div class="posts">
-                <span id="one" class="first active">
+                <span>
                     <?php
-//                    $sql_articles_only = "SELECT * FROM articles";
-//                    $articles_only = mysqli_query($connection, $sql_articles_only);
-//                    $art_only = mysqli_fetch_array($articles_only);
-                    $sql_articles_first = "SELECT * FROM register as reg 
-                                        JOIN articles as art ON art.user_id = reg.id
-                                        where art.id < 4";
-                    $articles = mysqli_query($connection, $sql_articles_first);
-                    while ($art = mysqli_fetch_array($articles))
-                    {
+
+                    if (isset($_GET['pageno'])) {
+                        $pageno = $_GET['pageno'];
+                    } else {
+                        $pageno = 1;
+                    }
+                    $size_page = 3;
+                    $offset = ($pageno-1) * $size_page;
+                    $count_sql = "SELECT COUNT(*) FROM `articles`";
+                    $result = mysqli_query($connection, $count_sql);
+                    $total_rows = mysqli_fetch_array($result)[0];
+                    $total_pages = ceil($total_rows / $size_page);
+                    $sql_articles = "SELECT * FROM `register` 
+                                    JOIN `articles` ON articles.user_id = register.id LIMIT $offset, $size_page";
+                    $res_data = mysqli_query($connection, $sql_articles);
+                    while($row = mysqli_fetch_array($res_data)){
                         ?>
                             <div class='post-content' data-aos='zoom-in'>
                                 <div class='post-image'>
                                     <div>
-                                        <img src='./assets/Blog-post/<?php echo $art['image'] ?>' class='img' alt='blog1'>
+                                        <img src='./assets/Blog-post/<?php echo $row['image'] ?>' class='img' alt='blog1'>
                                     </div>
                                     <div class='post-info flex-row'>
-                                        <span><i class='fas fa-user text-grey'></i><?php echo $art['login'] ?></span>
-                                        <span><i class='fas fa-calendar-alt text-grey'></i><?php echo $art['pubdate'] ?></span>
+                                        <span><i class='fas fa-user text-grey'></i><?php echo $row['login'] ?></span>
+                                        <span><i class='fas fa-calendar-alt text-grey'></i><?php echo $row['pubdate'] ?></span>
                                     </div>
                                 </div>
                                 <div class='post-title'>
-                                    <h2><?php echo $art['title'] ?></h2>
-                                    <p><?php echo $art['text_articles'] ?></p>
-                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>">Read more<i class='fas fa-arrow-right'></i></a>
+                                    <h2><?php echo $row['title'] ?></h2>
+                                    <p><?php echo $row['text_articles'] ?></p>
+                                    <a class="post-btn" href="./article.php?id=<?php echo $row['id']?>">Read more<i class='fas fa-arrow-right'></i></a>
                                 </div>
                             </div>
                         <?php
@@ -119,39 +127,16 @@ require_once "./navbar.php" ?>
                     ?>
                 <hr>
                 </span>
-                <span id="two" class="second">
-                    <?php
-                    $sql_articles_second = "SELECT * FROM articles 
-                                        JOIN register ON register.id = articles.user_id
-                                        where articles.id < 7 and articles.id > 3";
-                    $articles = mysqli_query($connection, $sql_articles_second);
-                    while ($art = mysqli_fetch_array($articles)) {
-                        ?>
-                        <div class='post-content' data-aos='zoom-in'>
-                                <div class='post-image'>
-                                    <div>
-                                        <img src='./assets/Blog-post/<?php echo $art['image'] ?>' class='img' alt='blog1'>
-                                    </div>
-                                    <div class='post-info flex-row'>
-                                        <span><i class='fas fa-user text-grey'></i><?php echo $art['login'] ?></span>
-                                        <span><i class='fas fa-calendar-alt text-grey'></i><?php echo $art['pubdate'] ?></span>
-                                    </div>
-                                </div>
-                                <div class='post-title'>
-                                    <h2><?php echo $art['title'] ?></h2>
-                                    <p><?php echo $art['text_articles'] ?></p>
-                                    <a class="post-btn" href="./article.php?id=<?php echo $art['id']?>">Read more<i class='fas fa-arrow-right'></i></a>
-                                </div>
-                            </div>
-                        <?php
-                    }
-                    ?>
-                <hr>
-                </span>
-                <div class="pagination flex-row">
-                    <a class="page active" id="first">1</a>
-                    <a class="page" id="second">2</a>
-                </div>
+                <ul class="pagination flex-row">
+                    <li><a href="?pageno=1">First</a></li>
+                    <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                        <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
+                    </li>
+                    <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                        <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+                    </li>
+                    <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+                </ul>
             </div>
             <aside class="sidebar">
                 <div class='category'>
@@ -167,7 +152,7 @@ require_once "./navbar.php" ?>
                         while ($art_cat = mysqli_fetch_array($articles_category)){
                             echo"
                         <li class='list-items' data-aos='fade-left' data-aos-delay='100'>
-                            <a method = 'get'>" .$art_cat['category']. "</a>
+                            <a>" .$art_cat['category']. "</a>
                             <span>(". $art_cat['count_category'] .")</span>
                         </li>
                         ";}

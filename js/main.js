@@ -88,18 +88,6 @@ $(document).ready(function () {
     });
 
 
-    //page changing
-    let pagination = document.querySelector(".pagination")
-    pagination.addEventListener("click", (e)=>{
-        let target = e.target
-        if(target.classList.contains("page")){
-            pagination.querySelector(".active").classList.remove("active")
-            target.classList.add("active");
-            document.querySelector(".posts span.active").classList.remove("active")
-            document.querySelector(`.${target.id}`).classList.add("active")
-        }
-            $('html, body').animate({scrollTop: '2000px'}, 800);
-    });
 
     //registration
     let buttonClick = document.getElementById("registration-btn")

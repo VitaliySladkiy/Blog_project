@@ -458,6 +458,10 @@ main .site-content .post-content .post-image .post-info span{
     margin: 7px;
 }
 
+main .site-content .post-content .post-image .post-info span .fas{
+    margin-right: 5px;
+}
+
 main .site-content .post-content .post-title h2{
     color: #707070;
 }
@@ -482,6 +486,10 @@ main .site-content .post-content .post-title .post-btn{
 main .site-content .post-content .post-title .post-btn:hover{
     transition: all 1s ease;
     color: white;
+}
+
+main .site-content .post-content .post-title i{
+    margin-left: 5px;
 }
 
 .site-content .pagination{
@@ -531,7 +539,7 @@ main .site-content .post-content .post-title .post-btn:hover{
 }
 
 .site-content .sidebar .popular-post h2{
-    padding-top: 8rem;
+    padding-top: 2rem;
 }
 
 .site-content .sidebar .popular-post .post-info{
@@ -551,7 +559,7 @@ main .site-content .post-content .post-title .post-btn:hover{
 }
 
 .site-content .sidebar .newsletter{
-    padding-top: 10rem;
+    padding-top: 2rem;
 }
 
 .site-content .sidebar .newsletter .font-element{
@@ -698,7 +706,9 @@ footer.footer .move-up.fixed:hover{
 
 /*------x-----------Footer--------------x-------*/
 
-
+.disabled{
+    display: none;
+}
 
 
 

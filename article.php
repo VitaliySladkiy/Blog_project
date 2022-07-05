@@ -44,7 +44,7 @@ require_once "navbar.php";
                             <div class="row">
                                 <section class="content__left col-md-8">
                                     <div class="block">
-                                        <h3>Статья не найдена!</h3>
+                                        <h1>Статья не найдена!</h1>
                                         <div class="block__content">
                                             <div class="full-text">
                                                 Запрашиваемая вами статья не существует
@@ -119,7 +119,12 @@ require_once "navbar.php";
                                  <input type="hidden" value="<?=$_GET['id'];?>" name = 'id_article'">
                                 <textarea name="comment_text" class="comment-textarea" placeholder="your comment..."></textarea>
                             </label>
-                            <button class="comment-btn" type="submit" >Add comment</button>
+                                <?php if(!isset($_COOKIE['username']) || !$_COOKIE['username']){
+                                    echo "<button class='comment-btn' style='background-color: grey'>You have to log in first</button>";
+                                } else{
+                                    echo "<button class='comment-btn' type='submit'>Add comment</button>";
+                                }
+                                ?>
                         </form>
                     </div>
                 </div>

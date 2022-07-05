@@ -89,7 +89,6 @@ require_once "./navbar.php"
             <div class="posts">
                 <span>
                     <?php
-
                     if (isset($_GET['pageno'])) {
                         $pageno = $_GET['pageno'];
                     } else {
@@ -102,7 +101,7 @@ require_once "./navbar.php"
                     $total_rows = mysqli_fetch_array($result)[0];
                     $total_pages = ceil($total_rows / $size_page);
                     $sql_articles = "SELECT * FROM `register` 
-                                    JOIN `articles` ON articles.user_id = register.id LIMIT $offset, $size_page";
+                                     JOIN `articles` ON articles.user_id = register.id LIMIT $offset, $size_page";
                     $res_data = mysqli_query($connection, $sql_articles);
                     while($row = mysqli_fetch_array($res_data)){
                         ?>

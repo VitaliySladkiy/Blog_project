@@ -32,7 +32,13 @@ require_once "nytimesapi.php";
 <body>
 
 <?php
-require_once "./navbar.php"
+require_once "./navbar.php";
+ $sql_articles_category = "SELECT category , COUNT(category) as count_category
+                                                        FROM articles_category
+                                                        JOIN articles 
+                                                        ON articles_category.id = articles.category_id
+                                                        GROUP by category
+                                                        ORDER BY count_category desc";
 ?>
 <!-----------------Main Site Section------------------->
 
@@ -100,8 +106,15 @@ require_once "./navbar.php"
                     $result = mysqli_query($connection, $count_sql);
                     $total_rows = mysqli_fetch_array($result)[0];
                     $total_pages = ceil($total_rows / $size_page);
-                    $sql_articles = "SELECT * FROM `register` 
-                                     JOIN `articles` ON articles.user_id = register.id LIMIT $offset, $size_page";
+                    $sql_articles = "SELECT register.login, articles.*, articles_category.category FROM `register`
+                                     JOIN `articles` ON articles.user_id = register.id
+                                     JOIN articles_category on articles.category_id = articles_category.id LIMIT $offset, $size_page";
+                    if (isset($_GET['category'])){
+                        $sql_articles = "SELECT register.login, articles.*, articles_category.category FROM `register`
+                                     JOIN `articles` ON articles.user_id = register.id
+                                     JOIN articles_category on articles.category_id = articles_category.id
+                                     WHERE articles_category.category = '".$_GET['category']."' LIMIT $offset, $size_page";
+                    };
                     $res_data = mysqli_query($connection, $sql_articles);
                     while($row = mysqli_fetch_array($res_data)){
                         ?>
@@ -127,31 +140,30 @@ require_once "./navbar.php"
                 <hr>
                 </span>
                 <ul class="pagination flex-row">
-                    <li><a href="?pageno=1">First</a></li>
+                    <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                        <a href="?pageno=1">First</a>
+                    </li>
                     <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
                         <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
                     </li>
                     <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
                         <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
                     </li>
-                    <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+                    <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                        <a href="?pageno=<?php echo $total_pages; ?>">Last</a>
+                    </li>
                 </ul>
             </div>
             <aside class="sidebar">
                 <div class='category'>
                     <h1>Category</h1>
                     <ul class='category-list'>
-                        <?php $sql_articles_category = "SELECT category , COUNT(category) as count_category
-                                                        FROM articles_category
-                                                        JOIN articles 
-                                                        ON articles_category.id = articles.category_id
-                                                        GROUP by category
-                                                        ORDER BY count_category desc";
+                        <?php
                         $articles_category = mysqli_query($connection, $sql_articles_category);
                         while ($art_cat = mysqli_fetch_array($articles_category)){
                             echo"
                         <li class='list-items' data-aos='fade-left' data-aos-delay='100'>
-                            <a>" .$art_cat['category']. "</a>
+                            <a href='http://localhost:63342/index.html/Blog_project/index.php?category=" .$art_cat['category']. "'>" .$art_cat['category']. "</a>
                             <span>(". $art_cat['count_category'] .")</span>
                         </li>
                         ";}
